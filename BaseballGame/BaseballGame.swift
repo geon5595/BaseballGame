@@ -29,31 +29,23 @@ class BaseballGame {
                 if let input = readLine() {
                     guard let _ = Int(input) else {
                         print("올바르지 않은 입력값입니다")
-                        if let curval = count[playcnt] {
-                            count[playcnt] = curval + 1
-                        }
+                        playCntIncrement(in: &count, atKey: playcnt)
                         continue
                     }
                     let inputArr = input.compactMap{ Int(String($0)) }
                     if Set(inputArr).count < 3 {
                         print("올바르지 않은 입력값입니다")
-                        if let curval = count[playcnt] {
-                            count[playcnt] = curval + 1
-                        }
+                        playCntIncrement(in: &count, atKey: playcnt)
                         continue
                     }
                     if inputArr[0] == 0 {
                         print("올바르지 않은 입력값입니다")
-                        if let curval = count[playcnt] {
-                            count[playcnt] = curval + 1
-                        }
+                        playCntIncrement(in: &count, atKey: playcnt)
                         continue
                     }
                     if inputArr.count != 3 {
                         print("올바르지 않은 입력값입니다")
-                        if let curval = count[playcnt] {
-                            count[playcnt] = curval + 1
-                        }
+                        playCntIncrement(in: &count, atKey: playcnt)
                         continue
                     }
                     for i in 0..<inputArr.count {
@@ -65,38 +57,32 @@ class BaseballGame {
                     }
                     if strike == 3 {
                         print("정답입니다!")
-                        if let curval = count[playcnt] {
-                            count[playcnt] = curval + 1
-                        }
+                        playCntIncrement(in: &count, atKey: playcnt)
                         playcnt += 1
                         break
                     }
                     if strike > 0 && ball > 0 {
-                        if let curval = count[playcnt] {
-                            count[playcnt] = curval + 1
-                        }
+                        playCntIncrement(in: &count, atKey: playcnt)
                         print("\(strike)스트라이크 \(ball)볼")
                     } else if strike > 0 {
-                        if let curval = count[playcnt] {
-                            count[playcnt] = curval + 1
-                        }
+                        playCntIncrement(in: &count, atKey: playcnt)
                         print("\(strike)스트라이크")
                     } else if ball > 0 {
-                        if let curval = count[playcnt] {
-                            count[playcnt] = curval + 1
-                        }
+                        playCntIncrement(in: &count, atKey: playcnt)
                         print("\(ball)볼")
                     } else {
-                        if let curval = count[playcnt] {
-                            count[playcnt] = curval + 1
-                        }
+                        playCntIncrement(in: &count, atKey: playcnt)
                         print("Nothing")
                     }
                 }
             }
         }
     }
-        
+    func playCntIncrement(in dictionary: inout [Int: Int], atKey key: Int) {
+        if let value = dictionary[key] {
+            dictionary[key] = value + 1
+        }
+    }
     
     func makeAnswer() -> [Int] {
         var number = [Int]()
